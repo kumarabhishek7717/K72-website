@@ -32,19 +32,25 @@ const Agence = () => {
 
 
   useGSAP(function(){
+
     gsap.to(imageDivRef.current,{
+
      scrollTrigger:{
       trigger:imageDivRef.current,
-      markers:true,
       start:'top 28%',
-      end:'top -70%', 
-      pin:true,
+      end:'top -70%',
+      pin:true, 
+      pinSpacing:true,
+      pinType:'transform',
+      scrub:1,
+      anticipatePin:1,
+      invalidateOnRefresh:true,
       onUpdate:(elem)=>{
         let imageIndex;
 
         if(elem.progress < 1){
           
-         imageIndex = (Math.floor(elem.progress * imageArray.length));
+         imageIndex = Math.floor(elem.progress * imageArray.length);
 
         } else {
           imageIndex = imageArray.length-1
@@ -64,7 +70,7 @@ const Agence = () => {
   return (
    <div>
     
-    <div className='section1'>
+    <div className='section1 relative py-1'>
 
       <div ref={imageDivRef} className='absolute overflow-hidden h-[20vw] rounded-3xl w-[15vw]  top-96 left-[30vw] bg-red-500'>
         <img ref={imageRef} className='h-full object-cover w-full' src="https://k72.ca/images/teamMembers/Carl_480x640.jpg?w=480&h=640&fit=crop&s=f0a84706bc91a6f505e8ad35f520f0b7" alt="" />
